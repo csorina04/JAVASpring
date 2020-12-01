@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Entity(name = "evenimente")
@@ -17,8 +19,15 @@ public class Eveniment implements Serializable {
 
 
     public Eveniment(String evenimentInfo) {
-        generateUUID();
 
+        Pattern pattern = Pattern.compile("(.*?);(.*?)");
+        Matcher matcher = pattern.matcher(evenimentInfo);
+
+        if (matcher.find()) {
+            this.nume = matcher.group(1);
+            this.descriere = matcher.group(2);
+
+        }
     }
 
 

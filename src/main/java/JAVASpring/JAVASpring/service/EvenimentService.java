@@ -1,6 +1,7 @@
 package JAVASpring.JAVASpring.service;
 
 import JAVASpring.JAVASpring.Eveniment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,13 +11,15 @@ import java.util.stream.Collectors;
 @Service
 public class EvenimentService implements EvenimentServiceInterface {
 
-
     List<Eveniment> listaEvenimente = new ArrayList<>();
+
+    @Autowired
+    public EvenimenteRepository evenimenteRepository;
 
     @Override
     public void createEveniment(Eveniment eveniment) {
         eveniment.generateUUID();
-        listaEvenimente.add(eveniment);
+        evenimenteRepository.save(eveniment);
 
     }
 
