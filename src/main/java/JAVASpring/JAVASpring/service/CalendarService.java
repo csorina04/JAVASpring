@@ -22,15 +22,14 @@ public class CalendarService implements CalendarServiceInterface {
     public CalendarRepository calendarRepository;
     HashMap<Calendar, Eveniment> mapCalendar = new HashMap<>();
 
+   public void createCalendar(Calendar calendar) {
+      calendarRepository.save(calendar);
+    }
+
 
     public void generateCalendarId() {
         this.calendarId = counter;
         counter++;
-    }
-
-
-    public void createCalendar(Calendar calendar) {
-       calendarRepository.save(calendar);
     }
 
 
@@ -42,5 +41,7 @@ public class CalendarService implements CalendarServiceInterface {
     public List<Eveniment> getListaEvenimente(Integer evenimentId) throws CalendarNotFound {
         return calendarRepository.findAll();
     }
+
+
 }
 

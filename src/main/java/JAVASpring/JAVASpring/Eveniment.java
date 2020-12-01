@@ -14,7 +14,6 @@ public class Eveniment implements Serializable {
     public Integer Id;
     private String nume;
     private String descriere;
-    private String calendarId;
     private String uuid;
 
 
@@ -43,9 +42,6 @@ public class Eveniment implements Serializable {
         return descriere;
     }
 
-    public String getCalendarId() {
-        return calendarId;
-    }
 
     public String getUuid() {
         return uuid;

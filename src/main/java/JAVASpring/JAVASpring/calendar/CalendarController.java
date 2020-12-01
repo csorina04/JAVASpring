@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping
 public class CalendarController {
@@ -21,7 +20,7 @@ public class CalendarController {
     @Autowired
     CalendarService calendarService;
         @GetMapping()
-    @ApiOperation(value = "get all events description") // folosit pentru a customiza documentatia
+   // @ApiOperation(value = "get all events description") // folosit pentru a customiza documentatia
     public List<Eveniment> getEvenimente(@RequestParam(required = false) Integer calendarId) throws CalendarNotFound {
         return (List<Eveniment>) calendarService.getMapCalendar(calendarId);
     }

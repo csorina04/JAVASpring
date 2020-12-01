@@ -1,19 +1,37 @@
 package JAVASpring.JAVASpring.calendar;
 
-import java.io.Serializable;
+import JAVASpring.JAVASpring.Eveniment;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Calendar implements Serializable {
-
+@Entity(name = "calendar")
+public class Calendar {
 
     String nume;
     String descriere;
+
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     int calendarId;
+
     private static int counter;
 
+    @OneToMany(mappedBy = "Calendar")
+    private Set<Eveniment> mapare= new HashSet<>();
+
+
     public Calendar(String calendarInfo) {
-        generateID();
+        //generateID();
         Pattern pattern = Pattern.compile("(.*?);(.*?)");
         Matcher matcher = pattern.matcher(calendarInfo);
 
@@ -25,12 +43,14 @@ public class Calendar implements Serializable {
 
     }
 
-
+/*
     public void generateID() {
         this.calendarId = counter;
         counter++;
 
     }
+
+ */
 
     public Calendar(String nume, String descriere, int calendarId) {
         this.nume = nume;
@@ -67,4 +87,16 @@ public class Calendar implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Calendar calendar = (Calendar) o;
+        return calendarId == calendar.calendarId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(calendarId);
+    }
 }
